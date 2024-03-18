@@ -15,9 +15,9 @@ export default function App() {
                     <Route path='/' element={<HomePage />} />
                     <Route path='/teams' element={ <TeamPage />}/>
                     {/*Edit team*/}
-                    <Route path='/edit-team/:id' element={<EditTeam />}/>
+                    <Route path='/edit-team/:id' element={<EditTeam isCreate={false} />}/>
                     {/*Add team */}
-                    <Route path='/add-team' element={<EditTeam />}/>
+                    <Route path='/add-team' element={<EditTeam isCreate={true}/>}/>
                     <Route path='*' element={<NotFound />}/>
                 </Route>
             </Routes>
