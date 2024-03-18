@@ -1,0 +1,72 @@
+@import './custom.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+/* Box sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-color-primary: #070708;
+  --bg-color-secondary: #18181B;
+  --text-color-primary: #FFFFFF;
+  --text-color-secondary: #BD8B5F;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+
+// Header
+.navbar, .navbar-toggler {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+}
+
+
+// Hero section
+.hero-section {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('../../assets/heroImg.jpeg') bottom left;
+}
+
+.barista-life-text {
+  color: var(--text-color-secondary)
+}
+
+// FAQ section
+.main-content {
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color-primary);
+  margin-top: -50px;
+}
+
+.faq-header {
+  color: var(--text-color-secondary);
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: var(--bg-color-secondary);
+  color: var(--text-color-primary);
+  font-weight: bold;
+}
+
+// Footer
+footer {
+  background-color: var(--bg-color-primary);
+}
+
+footer a {
+  color: var(--text-color-primary);
+}
+
+footer a:hover {
+  color: #d0b49a;
+}
+
+footer img {
+  height: 20px;
+}
