@@ -2,10 +2,10 @@ import {useContext} from 'react';
 import {TeamContext} from '../../../services/teamContext.jsx';
 import CarouselAside from '../../components/CarouselAside/CarouselAside.jsx';
 import ListView from '../../components/ListView/ListView.jsx';
-import eventImg1 from '../../assets/eventImages/bradley-pisney-d1WGcyc_HWw-unsplash (1).jpg'
-import eventImg2 from '../../assets/eventImages/brooke-cagle-8jp-6SjVibM-unsplash (1).jpg'
-import eventImg3 from '../../assets/eventImages/choi-sungwoo-XiyR0BXRIsI-unsplash (1).jpg'
-import eventImg4 from '../../assets/eventImages/tyler-nix-yGb2igKldYg-unsplash (1).jpg'
+import eventImg1 from '../../assets/eventImages/bradley-pisney-d1WGcyc_HWw-unsplash.jpg'
+import eventImg2 from '../../assets/eventImages/brooke-cagle-8jp-6SjVibM-unsplash.jpg'
+import eventImg3 from '../../assets/eventImages/choi-sungwoo-XiyR0BXRIsI-unsplash.jpg'
+import eventImg4 from '../../assets/eventImages/tyler-nix-yGb2igKldYg-unsplash.jpg'
 
 export default function TeamPage() {
     const {api, viewModel} = useContext(TeamContext)
