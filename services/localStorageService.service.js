@@ -66,7 +66,7 @@ export default class LocalStorageService {
     }
 
     async read(getId) {
-        let index = this.getItemIndex(getId)
+        let index = this.getItemIndex(Number(getId))
         if (index === -1) {
             return null
         }

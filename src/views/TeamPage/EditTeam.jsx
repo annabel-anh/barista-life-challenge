@@ -10,17 +10,34 @@ export default function EditTeam({isCreate}) {
     const {id} = useParams()
     const title = isCreate ? 'Add Team' : 'Edit Team'
     const [coachOpts, setCoachOpts ] = useState([])
+    const teamId = !isCreate ? id : ''
+
+    const emptyForm = {
+        'id': api.size + 1,
+        'leagueId': '',
+        'name': '',
+        'logoUrl': '',
+        'coachId': '',
+        'coachName': '',
+        'coachPhone': '',
+        'coachEmail': '',
+        'numPlayers': '',
+        'notes': '',
+        'motto': ''
+    }
+
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+        reset
+    } = useForm({defaultValues: !isCreate ? async () => api.read(teamId) : emptyForm})
 
     useEffect(() => {
         api.getLookup('coach')
             .then(coachData => setCoachOpts(coachData))
     }, []);
-
-    const {
-        register,
-        handleSubmit,
-        formState: {errors}
-    } = useForm()
 
     const onSubmit = (data) => console.log(data)
 
