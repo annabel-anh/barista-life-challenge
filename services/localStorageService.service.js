@@ -142,6 +142,15 @@ export default class LocalStorageService {
         return this.model.data.findIndex(entity => entity.id === id)
     }
 
+    async getLookup(entity) {
+        return this.model.data.map(item => {
+            return {
+                [`${entity}Name`]: item[`${entity}Name`],
+                [`${entity}Id`]: item[`${entity}Id`]
+            }
+        })
+    }
+
     cloneObject(obj) {
         return JSON.parse(JSON.stringify(obj))
     }
