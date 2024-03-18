@@ -14,8 +14,8 @@ export default function TeamPage() {
     return (
         <div className="container-fluid p-5">
             <div className="mt-4 pt-5">
-                <div className="row gx-3 gy-3 d-flex flex-column flex-lg-row">
-                    <div className="col-md-4">
+                <div className="row gx-3 gy-3 d-flex flex-column-reverse flex-xl-row">
+                    <div className="col-xl-4">
                         <aside className="bg-dark p-4 rounded-4">
                             <CarouselAside
                                 images={eventImages}
@@ -23,7 +23,7 @@ export default function TeamPage() {
                             />
                         </aside>
                     </div>
-                    <div className="col-md-8">
+                    <div className="col-xl-8">
                         <main className="bg-dark p-4 rounded-4">
                             <h1>{viewModel.list.listTitle}</h1>
                             <ListView api={api} viewModel={viewModel}/>

@@ -9,7 +9,9 @@ export default function DataTable({data, viewModel, sortCol, sortDir, onHandleDe
         <Table
             id="my-list"
             className="mt-2 border-dark-subtle border align-middle"
-            striped hover responsive="sm"
+            striped
+            hover
+            responsive
             size="lg"
             data-bs-theme="dark"
         >
