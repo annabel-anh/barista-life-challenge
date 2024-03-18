@@ -7,7 +7,7 @@ export default function Layout() {
         <div className='d-flex flex-column min-vh-100'>
             <Header />
             <div className='main-content flex-grow-1'><Outlet /></div>
-            <div className='mt-auto'><Footer /></div>
+            <Footer />
         </div>
     )
 }

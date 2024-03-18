@@ -11892,10 +11892,6 @@ body {
   font-weight: bold;
 }
 
-footer {
-  background-color: var(--bg-color-primary);
-}
-
 footer a {
   color: var(--text-color-primary);
 }
