@@ -49,8 +49,9 @@ export default function EditTeam({isCreate}) {
 
 
     const form = (
-        <form className="row g-3 needs-validation" onSubmit={handleSubmit(onSubmit)} noValidate>
-            <div className="col-md-6">
+        <form className="row g-3" onSubmit={handleSubmit(onSubmit)} data-bs-theme="dark">
+            {/*Team Name Field*/}
+            <div className="col-md-4">
                 <label className="form-label">Team Name</label>
                 <input
                     name="name"
@@ -59,7 +60,9 @@ export default function EditTeam({isCreate}) {
                 />
                 {(errors.name && errors.name.type === 'required') && (<p className="errorMsg">Team name is required.</p>)}
             </div>
-            <div className="col-md-6">
+
+            {/*Coach Name Field*/}
+            <div className="col-md-4">
                 <label className="form-label">Coach Name</label>
                 <select
                     name="coachId"
@@ -78,14 +81,32 @@ export default function EditTeam({isCreate}) {
                 </select>
                 {(errors.coachId && errors.coachId.type === 'required') && (<p className="errorMsg">You must choose a coach.</p>)}
             </div>
+
+            {/*Num Players Field*/}
+            <div className="col-md-4">
+                <label className="form-label">Number of Players</label>
+                <input
+                    name="numPlayers"
+                    {...register('numPlayers', {required: true, pattern: /^[2-6]$/})}
+                    className="form-control"
+                />
+                {(errors.numPlayers && errors.numPlayers.type === 'required') && (<p className="errorMsg">Number of Players is required.</p>)}
+                {(errors.numPlayers && errors.numPlayers.type === 'pattern') && (<p className="errorMsg">Number of Players must be between 2 and 6.</p>)}
+            </div>
+
+            {/*Note Field*/}
             <div className="col-md-6">
                 <label className="form-label">Notes</label>
                 <input name="notes" {...register('notes')} className="form-control"/>
             </div>
+
+            {/*Motto Field*/}
             <div className="col-md-6">
                 <label className="form-label">Motto</label>
                 <input name="motto" {...register('motto')} className="form-control"/>
             </div>
+
+            {/*Logo Field*/}
             <div className="col-md-12">
                 <label className="form-label">Logo URL</label>
                 <input name="logoUrl" {...register('logoUrl')} className="form-control"/>

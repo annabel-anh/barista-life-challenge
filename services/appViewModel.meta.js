@@ -21,6 +21,7 @@ let appViewModel = {
                     { label: 'Team Name', name: 'name' },
                     { label: 'Coach Name', name: 'coachName' },
                     { label: 'Coach Phone', name: 'coachPhone' },
+                    { label: 'Coach Email', name: 'coachEmail' },
                     { label: '# of Players', name: 'numPlayers' }
                 ],
                 options: {
