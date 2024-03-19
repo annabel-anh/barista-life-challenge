@@ -26,7 +26,6 @@ export default function EditTeam({isCreate}) {
         'motto': ''
     }
 
-
     const {
         register,
         handleSubmit,
@@ -35,11 +34,19 @@ export default function EditTeam({isCreate}) {
     } = useForm({defaultValues: !isCreate ? async () => api.read(teamId) : emptyForm})
 
     useEffect(() => {
-        api.getLookup('coach')
+        api.getLookup('coaches')
             .then(coachData => setCoachOpts(coachData))
     }, []);
 
-    const onSubmit = (data) => console.log(data)
+
+    const onSubmit = (data) => {
+        const coach = coachOpts[data.coachId - 1]
+        data = {...data, ...coach}
+
+        isCreate ? api.create(data) : api.update(data)
+        navigate('/teams')
+    }
+
 
     const form = (
         <form className="row g-3 needs-validation" onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -55,21 +62,21 @@ export default function EditTeam({isCreate}) {
             <div className="col-md-6">
                 <label className="form-label">Coach Name</label>
                 <select
-                    name="coachName"
-                    {...register('coachName', {required: true})}
+                    name="coachId"
+                    {...register('coachId', {required: true})}
                     className="form-select"
                     aria-label="Select coach"
                 >
                     <option selected value="" disabled>Select a coach</option>
                     {coachOpts.map(
                         coach => (
-                            <option key={coach.coachId} value={coach.coachName}>
+                            <option key={coach.coachId} value={coach.coachId}>
                                 {coach.coachName}
                             </option>
                         )
                     )}
                 </select>
-                {(errors.coachName && errors.coachName.type === 'required') && (<p className="errorMsg">You must choose a coach.</p>)}
+                {(errors.coachId && errors.coachId.type === 'required') && (<p className="errorMsg">You must choose a coach.</p>)}
             </div>
             <div className="col-md-6">
                 <label className="form-label">Notes</label>

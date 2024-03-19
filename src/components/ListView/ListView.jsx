@@ -56,9 +56,6 @@ export default function ListView({api, viewModel}) {
         setAlertList([])
     }
 
-    const handleEdit = () => {
-        // LMS4
-    }
 
     const handleSearch = (query) => {
         if (query.length > 2) {
@@ -82,8 +79,6 @@ export default function ListView({api, viewModel}) {
                 viewModel={viewModel}
                 onHandleDelete={handleDelete}
                 onHandleSort={handleSort}
-                onHandleEdit={handleEdit}
-                // isReset={isReset}
             />
             <Link to={`/add-${entitySingle}`}>
                 <Button

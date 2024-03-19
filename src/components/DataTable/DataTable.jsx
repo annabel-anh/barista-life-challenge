@@ -2,7 +2,7 @@ import Table from 'react-bootstrap/Table';
 import TableHeaderRow from './TableHeaderRow.jsx';
 import DataRow from './DataRow.jsx';
 
-export default function DataTable({data, viewModel, sortCol, sortDir, onHandleDelete, onHandleSort, onHandleEdit}) {
+export default function DataTable({data, viewModel, sortCol, sortDir, onHandleDelete, onHandleSort}) {
     const columns = viewModel.list.columns
 
     return (<div>
@@ -31,7 +31,6 @@ export default function DataTable({data, viewModel, sortCol, sortDir, onHandleDe
                 viewModel={viewModel}
                 columns={columns}
                 onHandleDelete={onHandleDelete}
-                onHandleEdit={onHandleEdit}
             />))}
             </tbody>
         </Table>

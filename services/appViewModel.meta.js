@@ -101,11 +101,36 @@ let appViewModel = {
             ],
             lookups: {
                 coaches: [
-                    { label: 'Eugen Favela', value: 1 },
-                    { label: 'Christa Snaddin', value: 2 },
-                    { label: 'Trina Duckitt', value: 3 },
-                    { label: 'Malanie Fellow', value: 4 },
-                    { label: 'Georgeanna Quinell', value: 5 }
+                    {
+                        coachName: 'Eugen Favela',
+                        coachId: 1,
+                        coachPhone: '958-707-7212',
+                        coachEmail: 'efavela0@xing.com'
+                    },
+                    {
+                        coachName: 'Christa Snaddin',
+                        coachId: 2,
+                        coachPhone: '150-226-3809',
+                        coachEmail: 'csnaddin1@yahoo.co.jp'
+                    },
+                    {
+                        coachName: 'Trina Duckitt',
+                        coachId: 3,
+                        coachPhone: '537-490-1401',
+                        coachEmail: 'tduckitt2@marriott.com'
+                    },
+                    {
+                        coachName: 'Malanie Fellow',
+                        coachId: 4,
+                        coachPhone: '416-209-4874',
+                        coachEmail: 'mfellow3@elpais.com'
+                    },
+                    {
+                        coachName: 'Georgeanna Quinell',
+                        coachId: 5,
+                        coachPhone: '994-752-8235',
+                        coachEmail: 'gquinell4@unblog.fr'
+                    }
                 ]
             }
         },

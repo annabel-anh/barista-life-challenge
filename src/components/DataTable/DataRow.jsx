@@ -8,7 +8,7 @@ import {FaEdit} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 
 
-export default function DataRow({id, data, columns, viewModel, onHandleDelete, onHandleEdit}) {
+export default function DataRow({id, data, columns, viewModel, onHandleDelete}) {
     const entity = viewModel.entitySingle
     const nameCol = viewModel.nameCol
     const dataAttr = columns.map(col => col.name)
