@@ -68,10 +68,34 @@ export default function ListView({api, viewModel}) {
     return (
         <>
             <AlertList alertList={alertList}/>
-            <SearchBar
-                placeholderText={`Search ${entitySingle}...`}
-                onHandleSearch={handleSearch}
-            />
+            <div className="container m-sm-0">
+                <div className="row p-0 gap-2">
+                    <Link to={`/add-${entitySingle}`} className='w-auto p-0'>
+                        <Button
+                            type='button'
+                            variant="btn btn-outline-success"
+                        >
+                            Add new {entitySingle} <FaPlus />
+                        </Button>
+                    </Link>
+                    <div className='w-auto p-0'>
+                        <Button
+                            type='button'
+                            variant="btn btn-outline-primary"
+                            onClick={() => handleReset()}
+                            className='w-auto'
+                        >
+                            Reset <FaArrowRotateLeft />
+                        </Button>
+                    </div>
+                    <div className="w-auto p-0 flex-grow-1">
+                        <SearchBar
+                            placeholderText={`Search ${entitySingle}...`}
+                            onHandleSearch={handleSearch}
+                        />
+                    </div>
+                </div>
+            </div>
             <DataTable
                 data={entityData}
                 sortCol={sortCol}
@@ -80,22 +104,7 @@ export default function ListView({api, viewModel}) {
                 onHandleDelete={handleDelete}
                 onHandleSort={handleSort}
             />
-            <Link to={`/add-${entitySingle}`}>
-                <Button
-                    type='button'
-                    variant="btn btn-outline-success"
-                    className='me-3'
-                >
-                    Add new {entitySingle} <FaPlus />
-                </Button>
-            </Link>
-            <Button
-                type='button'
-                variant="btn btn-outline-primary"
-                onClick={() => handleReset()}
-            >
-                Reset <FaArrowRotateLeft />
-            </Button>
+
         </>
     )
 }

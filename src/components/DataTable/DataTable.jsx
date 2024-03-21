@@ -8,7 +8,7 @@ export default function DataTable({data, viewModel, sortCol, sortDir, onHandleDe
     return (<div className="text-nowrap">
         <Table
             id="my-list"
-            className="mt-2 border-dark-subtle border align-middle"
+            className="border-dark-subtle border align-middle"
             striped
             hover
             responsive
