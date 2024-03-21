@@ -5,7 +5,7 @@ import DataRow from './DataRow.jsx';
 export default function DataTable({data, viewModel, sortCol, sortDir, onHandleDelete, onHandleSort}) {
     const columns = viewModel.list.columns
 
-    return (<div>
+    return (<div className="text-nowrap">
         <Table
             id="my-list"
             className="mt-2 border-dark-subtle border align-middle"

@@ -1,5 +1,10 @@
 import LocalStorageService from './localStorageService.service';
 //import RestStorageService from "./RestStorage.service";  //LMS6
+import cafeCrew from '../src/assets/teamLogos/cafeCrew.png'
+import brewSquad from '../src/assets/teamLogos/brewSquad.png'
+import javaJockeys from '../src/assets/teamLogos/javaJockeys.png'
+import mugMasters from '../src/assets/teamLogos/mugMasters.png'
+import sipStars from '../src/assets/teamLogos/sipStars.png'
 
 let appViewModel = {
     app: {
@@ -38,7 +43,7 @@ let appViewModel = {
                     'id': 1,
                     'leagueId': 1,
                     'name': 'Cafe Crew',
-                    'logoUrl': '../src/assets/teamLogos/cafeCrew.png',
+                    'logoUrl': cafeCrew,
                     'coachId': 1,
                     'coachName': 'Eugen Favela',
                     'coachPhone': '958-707-7212',
@@ -51,7 +56,7 @@ let appViewModel = {
                     'id': 2,
                     'leagueId': 1,
                     'name': 'Brew Squad',
-                    'logoUrl': '../src/assets/teamLogos/brewSquad.png',
+                    'logoUrl': brewSquad,
                     'coachId': 2,
                     'coachName': 'Christa Snaddin',
                     'coachPhone': '150-226-3809',
@@ -64,7 +69,7 @@ let appViewModel = {
                     'id': 3,
                     'leagueId': 1,
                     'name': 'Java Jockeys',
-                    'logoUrl': '../src/assets/teamLogos/javaJockeys.png',
+                    'logoUrl': javaJockeys,
                     'coachId': 3,
                     'coachName': 'Trina Duckitt',
                     'coachPhone': '537-490-1401',
@@ -77,7 +82,7 @@ let appViewModel = {
                     'id': 4,
                     'leagueId': 1,
                     'name': 'Mug Masters',
-                    'logoUrl': '../src/assets/teamLogos/mugMasters.png',
+                    'logoUrl': mugMasters,
                     'coachId': 4,
                     'coachName': 'Malanie Fellow',
                     'coachPhone': '416-209-4874',
@@ -90,7 +95,7 @@ let appViewModel = {
                     'id': 5,
                     'leagueId': 1,
                     'name': 'Sip Stars',
-                    'logoUrl': '../src/assets/teamLogos/sipStars.png',
+                    'logoUrl': sipStars,
                     'coachId': 5,
                     'coachName': 'Georgeanna Quinell',
                     'coachPhone': '994-752-8235',
