@@ -32,7 +32,7 @@ export default function DataRow({id, data, columns, viewModel, onHandleDelete}) 
                 {dataAttr.map(attr => <td key={attr}>{data[attr]}</td>)}
                 <td>
                     <Link to={`/edit-${entity}/${id}`}>
-                        <Button variant="btn btn-outline-light" type="button" className="me-md-3 mb-md-0 mb-2">
+                        <Button variant="btn btn-outline-light" type="button" className="me-md-2 mb-md-0 mb-2">
                             <FaEdit/>
                         </Button>
                     </Link>
