@@ -13,15 +13,12 @@ export default function EditTeam({isCreate}) {
     const teamId = !isCreate ? id : ''
 
     const emptyForm = {
-        'id': '',
         'name': '',
         'coach_id': '',
         'notes': '',
         'motto': '',
         'logo_path': '',
-        'league_id': '',
-        'phone': '',
-        'email': '',
+        'league_id': 1,
     }
 
     const {

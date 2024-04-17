@@ -131,6 +131,8 @@ export default class RestStorageService {
     async update(obj) {
         let url = `${this.apiUrl}/${obj.id}`
 
+        console.log(obj)
+
         return await this.doQuery(url, {
             method: "PUT",
             headers: {
