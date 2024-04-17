@@ -70,6 +70,10 @@ export default function ListView({api, viewModel}) {
         }
     }
 
+    const placeHolderText = (filterCol) => {
+        return filterCol.replace(/(?<!^)(?=[A-Z])/g, ' ').toLowerCase()
+    }
+
     return (
         <>
             <AlertList alertList={alertList}/>
@@ -95,7 +99,7 @@ export default function ListView({api, viewModel}) {
                     </div>
                     <div className="w-auto p-0 flex-grow-1">
                         <SearchBar
-                            placeholderText={`Search ${entitySingle}...`}
+                            placeholderText={`Search ${placeHolderText(filterCol)}...`}
                             onHandleSearch={handleSearch}
                         />
                     </div>
