@@ -13,17 +13,15 @@ export default function EditTeam({isCreate}) {
     const teamId = !isCreate ? id : ''
 
     const emptyForm = {
-        'id': api.size + 1,
-        'leagueId': '',
+        'id': '',
         'name': '',
-        'logoUrl': '',
-        'coachId': '',
-        'coachName': '',
-        'coachPhone': '',
-        'coachEmail': '',
-        'numPlayers': '',
+        'coach_id': '',
         'notes': '',
-        'motto': ''
+        'motto': '',
+        'logo_path': '',
+        'league_id': '',
+        'phone': '',
+        'email': '',
     }
 
     const {
@@ -38,11 +36,8 @@ export default function EditTeam({isCreate}) {
             .then(coachData => setCoachOpts(coachData))
     }, []);
 
-
     const onSubmit = (data) => {
-        const coach = coachOpts[data.coachId - 1]
-        data = {...data, ...coach}
-
+        data = {...data}
         isCreate ? api.create(data) : api.update(data)
         navigate('/teams')
     }
@@ -51,7 +46,7 @@ export default function EditTeam({isCreate}) {
     const form = (
         <form className="row g-3" onSubmit={handleSubmit(onSubmit)} data-bs-theme="dark">
             {/*Team Name Field*/}
-            <div className="col-md-4">
+            <div className="col-md-6">
                 <label className="form-label">Team Name</label>
                 <input
                     name="name"
@@ -62,42 +57,31 @@ export default function EditTeam({isCreate}) {
             </div>
 
             {/*Coach Name Field*/}
-            <div className="col-md-4">
+            <div className="col-md-6">
                 <label className="form-label">Coach Name</label>
                 <select
-                    name="coachId"
-                    {...register('coachId', {required: true})}
+                    name="coach_id"
+                    {...register('coach_id', {required: true})}
                     className="form-select"
                     aria-label="Select coach"
                 >
                     <option selected value="" disabled>Select a coach</option>
                     {coachOpts.map(
                         coach => (
-                            <option key={coach.coachId} value={coach.coachId}>
-                                {coach.coachName}
+                            <option key={coach.coach_id} value={coach.coach_id}>
+                                {coach.full_name}
                             </option>
                         )
                     )}
                 </select>
-                {(errors.coachId && errors.coachId.type === 'required') && (<p className="errorMsg">You must choose a coach.</p>)}
-            </div>
-
-            {/*Num Players Field*/}
-            <div className="col-md-4">
-                <label className="form-label">Number of Players</label>
-                <input
-                    name="numPlayers"
-                    {...register('numPlayers', {required: true, pattern: /^[2-6]$/})}
-                    className="form-control"
-                />
-                {(errors.numPlayers && errors.numPlayers.type === 'required') && (<p className="errorMsg">Number of Players is required.</p>)}
-                {(errors.numPlayers && errors.numPlayers.type === 'pattern') && (<p className="errorMsg">Number of Players must be between 2 and 6.</p>)}
+                {(errors.coach_id && errors.coach_id.type === 'required') && (<p className="errorMsg">You must choose a coach.</p>)}
             </div>
 
             {/*Note Field*/}
             <div className="col-md-6">
                 <label className="form-label">Notes</label>
-                <input name="notes" {...register('notes')} className="form-control"/>
+                <input name="notes" {...register('notes', {required: true})} className="form-control"/>
+                {(errors.notes && errors.notes.type === 'required') && (<p className="errorMsg">Notes can't be empty.</p>)}
             </div>
 
             {/*Motto Field*/}
@@ -109,7 +93,7 @@ export default function EditTeam({isCreate}) {
             {/*Logo Field*/}
             <div className="col-md-12">
                 <label className="form-label">Logo URL</label>
-                <input name="logoUrl" {...register('logoUrl')} className="form-control"/>
+                <input name="logo_path" {...register('logo_path')} className="form-control"/>
             </div>
             <div className="d-flex gap-3 justify-content-center mt-5">
                 <button type="submit" className="btn btn-primary">

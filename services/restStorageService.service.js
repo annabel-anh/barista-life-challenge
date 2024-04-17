@@ -1,3 +1,5 @@
+import Utils from "../util/utilities.js"
+
 export default class RestStorageService {
     "use strict";
     constructor(entity, endPoint, options = {}) {
@@ -28,7 +30,6 @@ export default class RestStorageService {
         this.model.options.sortDir = dir;
     }
 
-    /*KJ: Todo add filterStr*/
     get filterCol() {
         return this.model.options.filterCol;
     }
@@ -63,7 +64,11 @@ export default class RestStorageService {
 
     set options(opt) {
         this.model.options = {
-            sortCol: null, sortDir: 'asc', filterCol: '', filterStr: '', limit: 100, //we'll set 100 as limit to start
+            sortCol: null,
+            sortDir: 'asc',
+            filterCol: '',
+            filterStr: '',
+            limit: 100,
             offset: null
         };
         //merge any passed in options
@@ -92,43 +97,62 @@ export default class RestStorageService {
 
 
     async list() {
-        let url = `${this.apiUrl}/${Utils.getQueryString(this.options)}`;
+        let url = `${this.apiUrl}/${Utils.getQueryString(this.options)}`
 
         //implement 'list' call, returns a sorted/filtered/paged list from the backend
+        return await this.doQuery(url, {method: "GET"})
+
     }
 
     //CRUD FUNCTIONS
     async create(obj) {
         let url = `${this.apiUrl}/`
-        //TODO: implement create method, note that you will want to set your
-        //'content-type' header to 'application/json'
-        //you will also want to stringify the obj passed in and place in the 'body' of the request
+
+        console.log(obj)
+
+        return await this.doQuery(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(obj)
+        })
 
     }
 
     async read(id) {
         let url = `${this.apiUrl}/${id}`;
-        //implement read method
+
+        return await this.doQuery(url, {
+            method: "GET"
+        })
     }
 
-    async update(id, obj) {
-        let url = `${this.apiUrl}/${id}`
-        //TODO: implement update method, note that you will want to set your
-        //'content-type' header to 'application/json'
-        //you will also want to stringify the obj passed in and place in the 'body' of the request
+    async update(obj) {
+        let url = `${this.apiUrl}/${obj.id}`
 
+        return await this.doQuery(url, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(obj)
+        })
     }
 
     async delete(id) {
-        //TODO: implement delete method
+        let url = `${this.apiUrl}/${id}`
+        return await this.doQuery(url, {
+            method: "DELETE"
+        })
     }
 
     async getLookup(lookupName) {
         let url = `${this.lookupUrlPrefix}/${lookupName}`;
 
-        //implement lookup call.  if you are really clever, you will only call this
-        //one time and subsequent calls will pull from a 'cache'
-        //I use 'this.lookups' as the object for caching.  not required, but fun
+        return await this.doQuery(url, {
+            method: "GET"
+        })
     }
 
     async doQuery(url, options) {

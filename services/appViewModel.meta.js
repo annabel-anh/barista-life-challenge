@@ -24,16 +24,16 @@ let appViewModel = {
     entities: {
         teams: {
             entity: 'teams',
+            isMock: true,
             entitySingle: 'team',
             nameCol: 'name',
             list: {
                 listTitle: 'Teams List',
                 columns: [
                     { label: 'Team Name', name: 'name' },
-                    { label: 'Coach Name', name: 'coachName' },
-                    { label: 'Coach Phone', name: 'coachPhone' },
-                    { label: 'Coach Email', name: 'coachEmail' },
-                    { label: '# of Players', name: 'numPlayers' }
+                    { label: 'Coach Name', name: 'full_name' },
+                    { label: 'Coach Phone', name: 'phone' },
+                    { label: 'Coach Email', name: 'email' }
                 ],
                 options: {
                     sortCol: 'name',

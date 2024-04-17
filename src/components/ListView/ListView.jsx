@@ -25,7 +25,9 @@ export default function ListView({api, viewModel}) {
         api.filterCol = filterCol
 
         api.list()
-            .then(data => setEntityData([...data]))
+            .then(data => {
+                setEntityData([...data])
+            })
     }, [filterStr, filterCol, sortDir, sortCol, isReset, api]);
 
     const addAlert = (entityName, type) => {
@@ -88,14 +90,17 @@ export default function ListView({api, viewModel}) {
                         </Button>
                     </Link>
                     <div className='w-auto p-0'>
-                        <Button
-                            type='button'
-                            variant="btn btn-outline-primary"
-                            onClick={() => handleReset()}
-                            className='w-auto'
-                        >
-                            Reset <FaArrowRotateLeft />
-                        </Button>
+                        {
+                            api.isMock &&
+                            <Button
+                                type='button'
+                                variant="btn btn-outline-primary"
+                                onClick={() => handleReset()}
+                                className='w-auto'
+                            >
+                                Reset <FaArrowRotateLeft />
+                            </Button>
+                        }
                     </div>
                     <div className="w-auto p-0 flex-grow-1">
                         <SearchBar
