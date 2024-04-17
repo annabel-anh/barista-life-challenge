@@ -14,6 +14,7 @@ export default function ListView({api, viewModel}) {
     const [sortCol, setSortCol]  = useState(api.sortCol)
     const [sortDir, setSortDir]  = useState(api.sortDir)
     const [filterStr, setFilterStr] = useState(api.filterStr)
+    const [filterCol, setFilterCol] = useState(api.filterCol)
     const [isReset, setIsReset] = useState(false)
 
 
@@ -21,10 +22,11 @@ export default function ListView({api, viewModel}) {
         api.sortCol = sortCol
         api.sortDir = sortDir
         api.filterStr = filterStr
+        api.filterCol = filterCol
 
         api.list()
             .then(data => setEntityData([...data]))
-    }, [filterStr, sortDir, sortCol, isReset, api]);
+    }, [filterStr, filterCol, sortDir, sortCol, isReset, api]);
 
     const addAlert = (entityName, type) => {
         let newList = []
@@ -35,6 +37,7 @@ export default function ListView({api, viewModel}) {
     const handleSort = (colName, sortDir) => {
         setSortCol(colName)
         setSortDir(sortDir)
+        setFilterCol(colName)
     }
 
     const handleDelete = (id) => {
@@ -52,6 +55,8 @@ export default function ListView({api, viewModel}) {
 
         setSortCol(api.sortCol)
         setSortDir(api.sortDir)
+        setFilterStr(api.filterStr)
+        setFilterCol(api.filterCol)
         setIsReset(true)
         setAlertList([])
     }
