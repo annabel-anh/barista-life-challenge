@@ -10,61 +10,70 @@ export default class RestStorageService {
         this.lookups = {}
 
     }
-    //Getters and Setters
 
+    //Getters and Setters
     get sortCol() {
         return this.model.options.sortCol;
     }
+
     set sortCol(col) {
         this.model.options.sortCol = col;
     }
+
     get sortDir() {
         return this.model.options.sortDir;
     }
+
     set sortDir(dir) {
         this.model.options.sortDir = dir;
     }
+
     /*KJ: Todo add filterStr*/
     get filterCol() {
         return this.model.options.filterCol;
     }
+
     set filterCol(filterCol) {
         this.model.options.filterCol = filterCol;
     }
+
     get filterStr() {
         return this.model.options.filterStr;
     }
+
     set filterStr(filterStr) {
         this.model.options.filterStr = filterStr;
     }
+
     get limit() {
         return this.model.options.limit;
     }
+
     set limit(limit) {
         this.model.options.limit = limit;
     }
+
     get offset() {
         return this.model.options.offset;
     }
+
     get options() {
         return this.model.options;
     }
 
     set options(opt) {
         this.model.options = {
-            sortCol: null,
-            sortDir: "asc",
-            filterCol: "",
-            filterStr: "",
-            limit: 100, //we'll set 100 as limit to start
-            offset: null,
+            sortCol: null, sortDir: 'asc', filterCol: '', filterStr: '', limit: 100, //we'll set 100 as limit to start
+            offset: null
         };
         //merge any passed in options
         this.model.options = Object.assign(this.model.options, opt);
     }
+
     get apiName() {
         return `${this.entity}`;
     }
+
     get hostPrefix() {
         let url = `${this.endPoint.protocol}://${this.endPoint.host}`;
         if (this.endPoint.port) {
@@ -72,10 +81,12 @@ export default class RestStorageService {
         }
         return url;
     }
+
     get apiUrl() {
         return `${this.hostPrefix}/${this.apiName}`;
     }
-    get lookupUrlPrefix(){
+
+    get lookupUrlPrefix() {
         return `${this.hostPrefix}/lookups`;
     }
 
@@ -88,18 +99,20 @@ export default class RestStorageService {
 
     //CRUD FUNCTIONS
     async create(obj) {
-        let url=`${this.apiUrl}/`
+        let url = `${this.apiUrl}/`
         //TODO: implement create method, note that you will want to set your
         //'content-type' header to 'application/json'
         //you will also want to stringify the obj passed in and place in the 'body' of the request
 
     }
+
     async read(id) {
         let url = `${this.apiUrl}/${id}`;
         //implement read method
     }
+
     async update(id, obj) {
-        let url=`${this.apiUrl}/${id}`
+        let url = `${this.apiUrl}/${id}`
         //TODO: implement update method, note that you will want to set your
         //'content-type' header to 'application/json'
         //you will also want to stringify the obj passed in and place in the 'body' of the request
@@ -117,6 +130,7 @@ export default class RestStorageService {
         //one time and subsequent calls will pull from a 'cache'
         //I use 'this.lookups' as the object for caching.  not required, but fun
     }
+
     async doQuery(url, options) {
         try {
             const response = await fetch(url, options);

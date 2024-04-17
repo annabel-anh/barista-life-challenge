@@ -1,5 +1,5 @@
-import LocalStorageService from './localStorageService.service';
-//import RestStorageService from "./RestStorage.service";  //LMS6
+import LocalStorageService from './localStorageService.service'
+import RestStorageService from './restStorageService.service.js'
 import cafeCrew from '../src/assets/teamLogos/cafeCrew.png'
 import brewSquad from '../src/assets/teamLogos/brewSquad.png'
 import javaJockeys from '../src/assets/teamLogos/javaJockeys.png'
@@ -8,7 +8,13 @@ import sipStars from '../src/assets/teamLogos/sipStars.png'
 
 let appViewModel = {
     app: {
-        isMock: true,
+        endPoint: {
+            host: 'qa-api-spring24-env.eba-qjvvdvan.us-east-2.elasticbeanstalk.com',
+            port: '80',
+            protocol: 'http'
+
+        },
+        isMock: false,
         header:
             {
                 logo: '../public/coffeeIcon.png',
@@ -177,6 +183,12 @@ let appViewModel = {
         let model = this.entities[entity];
         if (this.app.isMock) {
             return new LocalStorageService(model, entity);
+        } else {
+            return new RestStorageService(
+                entity,
+                this.app.endPoint,
+                model.list.options
+            )
         }
     }
 };
