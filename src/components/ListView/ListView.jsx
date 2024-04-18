@@ -73,13 +73,9 @@ export default function ListView({api, viewModel}) {
 
     const handlePaging = (e) => {
         if (e.target.textContent.includes("Prev")) {
-            if (offset - limit >= 0) {
-                setOffset(offset - limit)
-            }
+            setOffset(offset - limit)
         } else if (e.target.textContent.includes("Next")) {
-            if (entityData.length >= limit) {
-                setOffset(offset + limit)
-            }
+            setOffset(offset + limit)
         }
     }
 
@@ -119,7 +115,7 @@ export default function ListView({api, viewModel}) {
                 onHandleDelete={handleDelete}
                 onHandleSort={handleSort}
             />
-            <Paging handlePaging={handlePaging}></Paging>
+            <Paging handlePaging={handlePaging} disabledNext={entityData.length < limit} disabledPrev={offset - limit < 0}></Paging>
         </>
     )
 }
