@@ -1,22 +1,23 @@
 import {useEffect, useState} from 'react';
 import DataTable from '../DataTable/DataTable.jsx';
 import AlertList from '../AlertList/AlertList.jsx';
-import { Button, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
+import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import { FaPlus } from "react-icons/fa6";
 import { Link } from 'react-router-dom'
+import Paging from '../Paging/Paging.jsx';
 
 export default function ListView({api, viewModel}) {
     const entitySingle = viewModel.entitySingle
     const [alertList,setAlertList] = useState([]);
-    const [entityData, setEntityData] = useState(null)
+    const [entityData, setEntityData] = useState([])
 
     const [sortCol, setSortCol]  = useState(api.sortCol)
     const [sortDir, setSortDir]  = useState(api.sortDir)
     const [filterStr, setFilterStr] = useState(api.filterStr)
     const [filterCol, setFilterCol] = useState(api.filterCol)
-    const [limit, setLimit] = useState(100)
-    const [offset, setOffset] = useState(0)
+    const [limit, setLimit] = useState(api.limit)
+    const [offset, setOffset] = useState(api.offset)
 
 
     useEffect(() => {
@@ -70,6 +71,18 @@ export default function ListView({api, viewModel}) {
         return filterCol.replace(/(?<!^)(?=[A-Z])/g, ' ').toLowerCase()
     }
 
+    const handlePaging = (e) => {
+        if (e.target.textContent.includes("Prev")) {
+            if (offset - limit >= 0) {
+                setOffset(offset - limit)
+            }
+        } else if (e.target.textContent.includes("Next")) {
+            if (entityData.length >= limit) {
+                setOffset(offset + limit)
+            }
+        }
+    }
+
     return (
         <>
             <AlertList alertList={alertList}/>
@@ -106,7 +119,7 @@ export default function ListView({api, viewModel}) {
                 onHandleDelete={handleDelete}
                 onHandleSort={handleSort}
             />
-
+            <Paging handlePaging={handlePaging}></Paging>
         </>
     )
 }
