@@ -108,8 +108,6 @@ export default class RestStorageService {
     async create(obj) {
         let url = `${this.apiUrl}/`
 
-        console.log(obj)
-
         return await this.doQuery(url, {
             method: "POST",
             headers: {
@@ -131,8 +129,6 @@ export default class RestStorageService {
     async update(obj) {
         let url = `${this.apiUrl}/${obj.id}`
 
-        console.log(obj)
-
         return await this.doQuery(url, {
             method: "PUT",
             headers: {
@@ -144,6 +140,7 @@ export default class RestStorageService {
 
     async delete(id) {
         let url = `${this.apiUrl}/${id}`
+
         return await this.doQuery(url, {
             method: "DELETE"
         })

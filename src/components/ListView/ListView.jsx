@@ -28,7 +28,7 @@ export default function ListView({api, viewModel}) {
             .then(data => {
                 setEntityData([...data])
             })
-    }, [filterStr, filterCol, sortDir, sortCol, isReset, api]);
+    }, [filterStr, filterCol, sortDir, sortCol, isReset, api, alertList]);
 
     const addAlert = (entityName, type) => {
         let newList = []
@@ -42,12 +42,12 @@ export default function ListView({api, viewModel}) {
         setFilterCol(colName)
     }
 
-    const handleDelete = (id) => {
-        const delItemName = api.model.data[api.getItemIndex(id)][viewModel.nameCol]
+    const handleDelete = async (id) => {
+        const delItem = await api.read(id)
+
         api.delete(id)
             .then(() => {
-                setEntityData([...api.model.data])
-                addAlert(delItemName, 'deleted')
+                addAlert(delItem.name, 'deleted')
             })
     }
 
