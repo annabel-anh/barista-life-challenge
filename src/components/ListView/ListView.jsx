@@ -15,7 +15,6 @@ export default function ListView({api, viewModel}) {
     const [sortDir, setSortDir]  = useState(api.sortDir)
     const [filterStr, setFilterStr] = useState(api.filterStr)
     const [filterCol, setFilterCol] = useState(api.filterCol)
-    const [isReset, setIsReset] = useState(false)
 
 
     useEffect(() => {
@@ -28,7 +27,7 @@ export default function ListView({api, viewModel}) {
             .then(data => {
                 setEntityData([...data])
             })
-    }, [filterStr, filterCol, sortDir, sortCol, isReset, api, alertList]);
+    }, [filterStr, filterCol, sortDir, sortCol, api, alertList]);
 
     const addAlert = (entityName, type) => {
         let newList = []
@@ -50,19 +49,6 @@ export default function ListView({api, viewModel}) {
                 addAlert(delItem.name, 'deleted')
             })
     }
-
-    const handleReset = () => {
-        api.reset()
-        api.clear()
-
-        setSortCol(api.sortCol)
-        setSortDir(api.sortDir)
-        setFilterStr(api.filterStr)
-        setFilterCol(api.filterCol)
-        setIsReset(true)
-        setAlertList([])
-    }
-
 
     const handleSearch = (query) => {
         if (query.length > 2) {
@@ -89,19 +75,6 @@ export default function ListView({api, viewModel}) {
                             Add new {entitySingle} <FaPlus />
                         </Button>
                     </Link>
-                    <div className='w-auto p-0'>
-                        {
-                            api.isMock &&
-                            <Button
-                                type='button'
-                                variant="btn btn-outline-primary"
-                                onClick={() => handleReset()}
-                                className='w-auto'
-                            >
-                                Reset <FaArrowRotateLeft />
-                            </Button>
-                        }
-                    </div>
                     <div className="w-auto p-0 flex-grow-1">
                         <SearchBar
                             placeholderText={`Search ${placeHolderText(filterCol)}...`}

@@ -98,8 +98,6 @@ export default class RestStorageService {
 
     async list() {
         let url = `${this.apiUrl}/${Utils.getQueryString(this.options)}`
-
-        //implement 'list' call, returns a sorted/filtered/paged list from the backend
         return await this.doQuery(url, {method: "GET"})
 
     }
