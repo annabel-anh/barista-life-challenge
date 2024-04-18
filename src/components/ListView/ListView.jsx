@@ -1,9 +1,9 @@
 import {useEffect, useState} from 'react';
 import DataTable from '../DataTable/DataTable.jsx';
 import AlertList from '../AlertList/AlertList.jsx';
-import Button from 'react-bootstrap/Button';
+import { Button, Dropdown, DropdownButton, Pagination } from 'react-bootstrap';
 import SearchBar from '../SearchBar/SearchBar.jsx';
-import { FaArrowRotateLeft, FaPlus } from "react-icons/fa6";
+import { FaPlus } from "react-icons/fa6";
 import { Link } from 'react-router-dom'
 
 export default function ListView({api, viewModel}) {
@@ -15,6 +15,8 @@ export default function ListView({api, viewModel}) {
     const [sortDir, setSortDir]  = useState(api.sortDir)
     const [filterStr, setFilterStr] = useState(api.filterStr)
     const [filterCol, setFilterCol] = useState(api.filterCol)
+    const [limit, setLimit] = useState(100)
+    const [offset, setOffset] = useState(0)
 
 
     useEffect(() => {
@@ -22,12 +24,14 @@ export default function ListView({api, viewModel}) {
         api.sortDir = sortDir
         api.filterStr = filterStr
         api.filterCol = filterCol
+        api.limit = limit
+        api.offset = offset
 
         api.list()
             .then(data => {
                 setEntityData([...data])
             })
-    }, [filterStr, filterCol, sortDir, sortCol, api, alertList]);
+    }, [filterStr, filterCol, sortDir, sortCol, api, alertList, limit, offset]);
 
     const addAlert = (entityName, type) => {
         let newList = []
@@ -58,6 +62,10 @@ export default function ListView({api, viewModel}) {
         }
     }
 
+    const handleLimit = (e) => {
+        setLimit(Number(e.target.textContent))
+    }
+
     const placeHolderText = (filterCol) => {
         return filterCol.replace(/(?<!^)(?=[A-Z])/g, ' ').toLowerCase()
     }
@@ -65,7 +73,7 @@ export default function ListView({api, viewModel}) {
     return (
         <>
             <AlertList alertList={alertList}/>
-            <div className="container m-sm-0">
+            <div className="container mb-3">
                 <div className="row p-0 gap-2">
                     <Link to={`/add-${entitySingle}`} className='w-auto p-0'>
                         <Button
@@ -80,6 +88,13 @@ export default function ListView({api, viewModel}) {
                             placeholderText={`Search ${placeHolderText(filterCol)}...`}
                             onHandleSearch={handleSearch}
                         />
+                    </div>
+                    <div className="w-auto p-0">
+                        <DropdownButton data-bs-theme="dark" id="dropdown-item-button" title="Limit" variant='secondary'>
+                            <Dropdown.Item as="button" onClick={handleLimit}>5</Dropdown.Item>
+                            <Dropdown.Item as="button" onClick={handleLimit}>10</Dropdown.Item>
+                            <Dropdown.Item as="button" onClick={handleLimit}>20</Dropdown.Item>
+                        </DropdownButton>
                     </div>
                 </div>
             </div>

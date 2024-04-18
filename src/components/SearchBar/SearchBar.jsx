@@ -7,7 +7,7 @@ export default function SearchBar({placeholderText, onHandleSearch}) {
     const [inputValue, setInputValue] = useState('')
 
     return (
-        <InputGroup className="mb-3" data-bs-theme="dark">
+        <InputGroup data-bs-theme="dark">
             <Form.Control
                 value={inputValue}
                 placeholder={placeholderText}

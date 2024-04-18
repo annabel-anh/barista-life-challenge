@@ -58,6 +58,10 @@ export default class RestStorageService {
         return this.model.options.offset;
     }
 
+    set offset(value) {
+        this.model.options.offset = value
+    }
+
     get options() {
         return this.model.options;
     }
@@ -95,12 +99,11 @@ export default class RestStorageService {
         return `${this.hostPrefix}/lookups`;
     }
 
-
     async list() {
         let url = `${this.apiUrl}/${Utils.getQueryString(this.options)}`
         return await this.doQuery(url, {method: "GET"})
-
     }
+
 
     //CRUD FUNCTIONS
     async create(obj) {
