@@ -25,7 +25,7 @@ export default function EditTeam({isCreate}) {
         register,
         handleSubmit,
         formState: {errors},
-        setValue
+        reset
     } = useForm({defaultValues: emptyForm})
 
     useEffect(() => {
@@ -35,11 +35,7 @@ export default function EditTeam({isCreate}) {
         if (!isCreate) {
             api.read(teamId)
                 .then(data => {
-                    setValue('name', data.name)
-                    setValue('coach_id', data.coach_id)
-                    setValue('notes', data.notes)
-                    setValue('motto', data.motto)
-                    setValue('logo_path', data.logo_path)
+                    reset({...data})
                 })
         }
     }, [teamId]);
