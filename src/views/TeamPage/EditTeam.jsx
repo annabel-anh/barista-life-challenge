@@ -42,7 +42,6 @@ export default function EditTeam({isCreate}) {
 
     const onSubmit = async (data) => {
         data = {...data}
-        console.log(data)
         isCreate ? await api.create(data) : await api.update(data)
         navigate('/teams')
     }
