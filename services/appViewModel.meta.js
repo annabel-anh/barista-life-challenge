@@ -10,6 +10,8 @@ let appViewModel = {
         endPoint: {
             host: 'qa-api-spring24-env.eba-qjvvdvan.us-east-2.elasticbeanstalk.com',
             port: '80',
+            // host: 'localhost',
+            // port: 8080,
             protocol: 'http'
 
         },

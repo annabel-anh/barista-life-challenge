@@ -33,9 +33,9 @@ export default function EditTeam({isCreate}) {
             .then(coachData => setCoachOpts(coachData))
     }, []);
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         data = {...data}
-        isCreate ? api.create(data) : api.update(data)
+        isCreate ? await api.create(data) : await api.update(data)
         navigate('/teams')
     }
 
