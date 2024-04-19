@@ -18,27 +18,38 @@ export default function EditTeam({isCreate}) {
         'notes': '',
         'motto': '',
         'logo_path': '',
-        'league_id': 1,
+        'league_id': 1
     }
 
     const {
         register,
         handleSubmit,
         formState: {errors},
-        reset
-    } = useForm({defaultValues: !isCreate ? async () => api.read(teamId) : emptyForm})
+        setValue
+    } = useForm({defaultValues: emptyForm})
 
     useEffect(() => {
         api.getLookup('coaches')
             .then(coachData => setCoachOpts(coachData))
-    }, []);
+
+        if (!isCreate) {
+            api.read(teamId)
+                .then(data => {
+                    setValue('name', data.name)
+                    setValue('coach_id', data.coach_id)
+                    setValue('notes', data.notes)
+                    setValue('motto', data.motto)
+                    setValue('logo_path', data.logo_path)
+                })
+        }
+    }, [teamId]);
 
     const onSubmit = async (data) => {
         data = {...data}
+        console.log(data)
         isCreate ? await api.create(data) : await api.update(data)
         navigate('/teams')
     }
-
 
     const form = (
         <form className="row g-3" onSubmit={handleSubmit(onSubmit)} data-bs-theme="dark">
