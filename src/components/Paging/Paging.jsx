@@ -1,5 +1,4 @@
 import { Pagination } from 'react-bootstrap';
-import {useState} from 'react';
 
 export default function Paging({handlePaging, disabledNext, disabledPrev}) {
 

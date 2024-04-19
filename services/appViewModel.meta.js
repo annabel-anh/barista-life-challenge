@@ -8,9 +8,8 @@ import sipStars from '../src/assets/teamLogos/sipStars.png'
 let appViewModel = {
     app: {
         endPoint: {
-            // host: 'qa-api-spring24-env.eba-qjvvdvan.us-east-2.elasticbeanstalk.com',
-            host: 'localhost',
-            port: '8080',
+            host: 'qa-api-spring24-env.eba-qjvvdvan.us-east-2.elasticbeanstalk.com',
+            port: '80',
             protocol: 'http'
 
         },
