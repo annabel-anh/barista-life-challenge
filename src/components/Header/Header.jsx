@@ -24,6 +24,9 @@ export default function Header() {
                     <LinkContainer to="/teams">
                         <Nav.Link>Teams</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to="/players">
+                        <Nav.Link>Players</Nav.Link>
+                    </LinkContainer>
                 </Nav>
             </Navbar.Collapse>
         </Container>

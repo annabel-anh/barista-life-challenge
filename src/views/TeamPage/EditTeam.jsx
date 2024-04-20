@@ -1,7 +1,7 @@
 import {useContext, useEffect, useState} from 'react';
 import {useParams, useNavigate, Link} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
-import {TeamContext} from '../../../services/teamContext.jsx';
+import {TeamContext} from '../../../services/contextFactory.jsx';
 
 
 export default function EditTeam({isCreate}) {

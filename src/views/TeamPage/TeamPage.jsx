@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import {TeamContext} from '../../../services/teamContext.jsx';
+import {TeamContext} from '../../../services/contextFactory.jsx';
 import CarouselAside from '../../components/CarouselAside/CarouselAside.jsx';
 import ListView from '../../components/ListView/ListView.jsx';
 import eventImg1 from '../../assets/eventImages/bradley-pisney-d1WGcyc_HWw-unsplash.jpg'

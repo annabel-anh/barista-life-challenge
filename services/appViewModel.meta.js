@@ -160,7 +160,7 @@ let appViewModel = {
                     limit: 50,
                     offset: 0
                 },
-                listTitle: 'Current #BaristaLife Baristas',
+                listTitle: 'Baristas List',
                 columns: [
                     { label: 'Name', name: 'full_name' },
                     { label: 'Team', name: 'team_name' },
