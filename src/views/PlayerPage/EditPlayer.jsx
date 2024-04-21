@@ -26,7 +26,8 @@ export default function EditPlayer({isCreate}) {
         'user_name': '',
         'license_level_id': 1,
         'logo_path': '',
-        'person_type': 'player'
+        'person_type': 'player',
+        'password': 'password'
     }
 
     const {

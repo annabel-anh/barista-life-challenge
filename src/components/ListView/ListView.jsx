@@ -9,7 +9,7 @@ import Paging from '../Paging/Paging.jsx';
 
 export default function ListView({api, viewModel}) {
     const entitySingle = viewModel.entitySingle
-    const [alertList,setAlertList] = useState([]);
+    const [alertList,setAlertList] = useState([])
     const [entityData, setEntityData] = useState([])
 
     const [sortCol, setSortCol]  = useState(api.sortCol)
@@ -49,9 +49,11 @@ export default function ListView({api, viewModel}) {
     const handleDelete = async (id) => {
         const delItem = await api.read(id)
 
+        const entityName = entitySingle === 'team' ? delItem.name : `${delItem.first_name} ${delItem.last_name}`
+
         api.delete(id)
             .then(() => {
-                addAlert(delItem.name, 'deleted')
+                addAlert(entityName, 'deleted')
             })
     }
 
