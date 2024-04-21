@@ -18,7 +18,10 @@ export default function DataRow({id, data, columns, viewModel, onHandleDelete}) 
         <Popover.Header as="h3">{data[nameCol]}</Popover.Header>
         <Popover.Body>
             <Image src={data.logoUrl} className="w-100 mb-2 rounded-3"/>
-            {`${data[nameCol]} joins #BaristaLife with the motto "${data.motto}"`}
+            {entity === 'team' ?
+                `${data[nameCol]} joins #BaristaLife with the motto "${data.motto}"`:
+                `${data[nameCol]} is from ${data.city}, ${data.state}`
+            }
         </Popover.Body>
     </Popover>);
 

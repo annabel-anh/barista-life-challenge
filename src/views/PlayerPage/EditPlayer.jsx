@@ -38,7 +38,9 @@ export default function EditPlayer({isCreate}) {
 
     useEffect(() => {
         api.getLookup('teams')
-            .then(teamData => setTeamOpts(teamData))
+            .then(teamData => {
+                setTeamOpts(teamData)
+            })
 
         if (!isCreate) {
             api.read(playerId)
@@ -110,30 +112,112 @@ export default function EditPlayer({isCreate}) {
                 {(errors.city && errors.city.type === 'required') && (<p className="errorMsg">City is required.</p>)}
             </div>
 
+            {/*State Field*/}
             <div className="col-md-4">
                 <label className="form-label">State</label>
                 <input
                     name="state"
-                    {...register('state', {required: true, minLength: 2, maxLength: 2})}
+                    {...register('state', {
+                        required: true,
+                        minLength: 2,
+                        maxLength: 2,
+                        pattern: {
+                            value: /^[A-Za-z]+$/,
+                            message: "State can only include alphabetical letters."
+                        }
+                    })}
                     className="form-control"
                 />
                 {(errors.state && errors.state.type === 'required') && (<p className="errorMsg">State is required.</p>)}
                 {(errors.state && (errors.state.type === 'minLength' || errors.state.type === 'maxLength')) && (<p className="errorMsg">State should be abbreviated.</p>)}
+                {(errors.state && (errors.state.type === 'pattern')) && (<p className="errorMsg">{errors.state.message}</p>)}
             </div>
 
             <div className="col-md-4">
-                <label className="form-label">State</label>
+                <label className="form-label">Zip</label>
                 <input
-                    name="state"
-                    {...register('state', {required: true, minLength: 2, maxLength: 2})}
+                    name="zip"
+                    {...register('zip', {
+                        required: true,
+                        minLength: 5,
+                        maxLength: 5,
+                        pattern: {
+                            value: /^[0-9]+$/,
+                            message: "Zip code can only include numbers."
+                        }
+                    })}
                     className="form-control"
                 />
-                {(errors.state && errors.state.type === 'required') && (<p className="errorMsg">State is required.</p>)}
-                {(errors.state && (errors.state.type === 'minLength' || errors.state.type === 'maxLength')) && (<p className="errorMsg">State should be abbreviated.</p>)}
+                {(errors.zip && errors.zip.type === 'required') && (<p className="errorMsg">Zip code is required.</p>)}
+                {(errors.zip && (errors.zip.type === 'minLength' || errors.zip.type === 'maxLength')) && (<p className="errorMsg">Zip code must contain 5 digits.</p>)}
+                {(errors.zip && (errors.zip.type === 'pattern')) && (<p className="errorMsg">{errors.zip.message}</p>)}
             </div>
 
-            {/*Coach Name Field*/}
+            {/*Email Field*/}
             <div className="col-md-6">
+                <label className="form-label">Email</label>
+                <input
+                    name="email"
+                    {...register('email', {
+                        required: true,
+                        pattern: {
+                            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+                            message: 'Email is invalid.'
+                        }
+                    })}
+                    className="form-control"
+                />
+                {(errors.email && errors.email.type === 'required') && (<p className="errorMsg">Email is required.</p>)}
+                {(errors.email && (errors.email.type === 'pattern')) && (<p className="errorMsg">{errors.email.message}</p>)}
+            </div>
+
+            {/*Phone Field*/}
+            <div className="col-md-6">
+                <label className="form-label">Phone</label>
+                <input
+                    name="phone"
+                    {...register('phone', {
+                        required: true,
+                        pattern: {
+                            value: /^(?:\d{10}|\d{3}-\d{3}-\d{4})$/,
+                            message: "Phone number should be either 10 digits without any spaces or dashes, or in" +
+                                " the format ###-###-####."
+                        }
+                    })}
+                    className="form-control"
+                />
+                {(errors.phone && errors.phone.type === 'required') && (<p className="errorMsg">Phone number is required.</p>)}
+                {(errors.phone && (errors.phone.type === 'pattern')) && (<p className="errorMsg">{errors.phone.message}</p>)}
+            </div>
+
+            {/*user_name Field*/}
+            <div className="col-md-4">
+                <label className="form-label">Username</label>
+                <input
+                    name="user_name"
+                    {...register('user_name', {
+                        required: true,
+                        minLength: 6,
+                        pattern: {
+                            value: /^(?=.*[A-Z])(?=.*\d)(?=.*[^\w\s]).*$/,
+                            message: 'Username must include 1 uppercase letter, 1 number, and 1 special character.'
+                        }
+                    })}
+                    className="form-control"
+                />
+                {(errors.user_name && errors.user_name.type === 'required') && (<p className="errorMsg">Username is required.</p>)}
+                {(errors.user_name && errors.user_name.type === 'minLength') && (<p className="errorMsg">Username must have at least 6 character.</p>)}
+                {(errors.user_name && (errors.user_name.type === 'pattern')) && (<p className="errorMsg">{errors.user_name.message}</p>)}
+            </div>
+
+            {/*Logo Field*/}
+            <div className="col-md-4">
+                <label className="form-label">Path to Profile Picture</label>
+                <input name="logo_path" {...register('logo_path')} className="form-control"/>
+            </div>
+
+            {/*Team Name Field*/}
+            <div className="col-md-4">
                 <label className="form-label">Team Name</label>
                 <select
                     name="team_id"
@@ -153,29 +237,11 @@ export default function EditPlayer({isCreate}) {
                 {(errors.team_id && errors.team_id.type === 'required') && (<p className="errorMsg">You must choose a team.</p>)}
             </div>
 
-            {/*Note Field*/}
-            <div className="col-md-6">
-                <label className="form-label">Notes</label>
-                <input name="notes" {...register('notes', {required: true})} className="form-control"/>
-                {(errors.notes && errors.notes.type === 'required') && (<p className="errorMsg">Notes can't be empty.</p>)}
-            </div>
-
-            {/*Motto Field*/}
-            <div className="col-md-6">
-                <label className="form-label">Motto</label>
-                <input name="motto" {...register('motto')} className="form-control"/>
-            </div>
-
-            {/*Logo Field*/}
-            <div className="col-md-12">
-                <label className="form-label">Logo URL</label>
-                <input name="logo_path" {...register('logo_path')} className="form-control"/>
-            </div>
             <div className="d-flex gap-3 justify-content-center mt-5">
                 <button type="submit" className="btn btn-primary">
-                    {isCreate ? 'Add Team' : 'Save'}
+                    {isCreate ? 'Add Player' : 'Save'}
                 </button>
-                <Link to='/teams'>
+                <Link to='/players'>
                     <button className="btn btn-secondary">Cancel</button>
                 </Link>
             </div>
