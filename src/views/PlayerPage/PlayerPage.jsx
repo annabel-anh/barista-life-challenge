@@ -2,16 +2,15 @@ import {useContext} from 'react';
 import {PlayerContext} from '../../../services/contextFactory.jsx';
 import CarouselAside from '../../components/CarouselAside/CarouselAside.jsx';
 import ListView from '../../components/ListView/ListView.jsx';
-import eventImg1 from '../../assets/eventImages/bradley-pisney-d1WGcyc_HWw-unsplash.jpg'
-import eventImg2 from '../../assets/eventImages/brooke-cagle-8jp-6SjVibM-unsplash.jpg'
-import eventImg3 from '../../assets/eventImages/choi-sungwoo-XiyR0BXRIsI-unsplash.jpg'
-import eventImg4 from '../../assets/eventImages/tyler-nix-yGb2igKldYg-unsplash.jpg'
+import person1 from '../../assets/baristaPics/benyamin-bohlouli-z_07LsS_A8E-unsplash.jpg'
+import person2 from '../../assets/baristaPics/good-faces-Mff42ssF9XE-unsplash.jpg'
+import person3 from '../../assets/baristaPics/brooke-cagle-NoRsyXmHGpI-unsplash.jpg'
 
 
 export default function PlayerPage() {
     const {api, viewModel} = useContext(PlayerContext)
 
-    const eventImages = [eventImg1, eventImg2, eventImg3, eventImg4]
+    const eventImages = [person1, person2, person3]
     return (
         <div className="container-fluid p-5">
             <div className="mt-4 pt-5">
