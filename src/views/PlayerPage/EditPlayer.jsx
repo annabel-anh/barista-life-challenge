@@ -33,6 +33,7 @@ export default function EditPlayer({isCreate}) {
     const {
         register,
         handleSubmit,
+        setError,
         formState: {errors},
         reset
     } = useForm({defaultValues: emptyForm})
@@ -53,7 +54,20 @@ export default function EditPlayer({isCreate}) {
 
     const onSubmit = async (data) => {
         data = {...data}
-        isCreate ? await api.create(data) : await api.update(data)
+        if (isCreate) {
+            const response = await api.create(data)
+            if (response.errors) {
+
+                setError("email", {
+                    type: "duplicate",
+                    message: "The email address has already been registered for a player."
+                })
+                return
+
+            }
+        } else {
+            await api.update(data)
+        }
         navigate('/players')
     }
 
@@ -170,6 +184,7 @@ export default function EditPlayer({isCreate}) {
                 />
                 {(errors.email && errors.email.type === 'required') && (<p className="errorMsg">Email is required.</p>)}
                 {(errors.email && (errors.email.type === 'pattern')) && (<p className="errorMsg">{errors.email.message}</p>)}
+                {(errors.email && (errors.email.type === 'duplicate')) && (<p className="errorMsg">{errors.email.message}</p>)}
             </div>
 
             {/*Phone Field*/}
