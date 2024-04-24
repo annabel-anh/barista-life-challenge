@@ -58,12 +58,7 @@ export default function EditPlayer({isCreate}) {
 
     const onSubmit = async (data) => {
         data = {...data}
-        let response
-        if (isCreate) {
-            response = await api.create(data)
-        } else {
-            response = await api.update(data)
-        }
+        const response = isCreate ? await api.create(data) : await api.update(data)
 
         if (response.errors) {
             setError("email", {
