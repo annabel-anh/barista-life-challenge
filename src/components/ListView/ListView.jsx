@@ -67,6 +67,7 @@ export default function ListView({api, viewModel}) {
 
     const handleLimit = (e) => {
         setLimit(Number(e.target.textContent))
+        setOffset(0)
     }
 
     const placeHolderText = (filterCol) => {
@@ -117,7 +118,7 @@ export default function ListView({api, viewModel}) {
                 onHandleDelete={handleDelete}
                 onHandleSort={handleSort}
             />
-            <Paging handlePaging={handlePaging} disabledNext={entityData.length < limit} disabledPrev={offset - limit < 0}></Paging>
+            <Paging handlePaging={handlePaging} disabledPrev={offset - limit < 0} disabledNext={entityData.length < limit} ></Paging>
         </>
     )
 }
