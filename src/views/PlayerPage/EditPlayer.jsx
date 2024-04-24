@@ -11,6 +11,10 @@ export default function EditPlayer({isCreate}) {
     const title = isCreate ? 'Add Player' : 'Edit Player'
     const [teamOpts, setTeamOpts ] = useState([])
     const playerId = !isCreate ? id : ''
+    const states = [ 'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA', 'GU', 'HI',
+        'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH',
+        'NJ', 'NM', 'NY', 'NC', 'ND', 'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT',
+        'VI', 'VA', 'WA', 'WV', 'WI', 'WY' ];
 
     const emptyForm = {
         'first_name': '',
@@ -54,19 +58,19 @@ export default function EditPlayer({isCreate}) {
 
     const onSubmit = async (data) => {
         data = {...data}
+        let response
         if (isCreate) {
-            const response = await api.create(data)
-            if (response.errors) {
-
-                setError("email", {
-                    type: "duplicate",
-                    message: "The email address has already been registered for a player."
-                })
-                return
-
-            }
+            response = await api.create(data)
         } else {
-            await api.update(data)
+            response = await api.update(data)
+        }
+
+        if (response.errors) {
+            setError("email", {
+                type: "duplicate",
+                message: "This email address has already been registered for a player."
+            })
+            return
         }
         navigate('/players')
     }
@@ -130,24 +134,25 @@ export default function EditPlayer({isCreate}) {
             {/*State Field*/}
             <div className="col-md-4">
                 <label className="form-label">State</label>
-                <input
+                <select
                     name="state"
-                    {...register('state', {
-                        required: true,
-                        minLength: 2,
-                        maxLength: 2,
-                        pattern: {
-                            value: /^[A-Za-z]+$/,
-                            message: "State can only include alphabetical letters."
-                        }
-                    })}
-                    className="form-control"
-                />
+                    {...register('state', {required: true})}
+                    className="form-select"
+                    aria-label="Select a State"
+                >
+                    <option selected value="" disabled>Select a State</option>
+                    {states.map(
+                        state => (
+                            <option key={state} value={state}>
+                                {state}
+                            </option>
+                        )
+                    )}
+                </select>
                 {(errors.state && errors.state.type === 'required') && (<p className="errorMsg">State is required.</p>)}
-                {(errors.state && (errors.state.type === 'minLength' || errors.state.type === 'maxLength')) && (<p className="errorMsg">State should be abbreviated.</p>)}
-                {(errors.state && (errors.state.type === 'pattern')) && (<p className="errorMsg">{errors.state.message}</p>)}
             </div>
 
+            {/*Zip Field*/}
             <div className="col-md-4">
                 <label className="form-label">Zip</label>
                 <input
